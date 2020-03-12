@@ -1,0 +1,10 @@
+<h1>CHECK OUT THIS STUDNET</h1>
+
+<ul>
+  <p>Student Name: <%= @student.pretty_name() %></p>
+  <p>Student Age: <%= @student.age %></p>
+  <p>House: <%= @student.get_house() %></p>
+  <hr>
+  <p><a href="/hogwarts/<%= @student.id %>/edit">Edit this student</a></p>
+  <p><a href="/hogwarts/<%= @student.id %>/delete">Delete this student</a></p>
+</ul>

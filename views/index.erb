@@ -1,0 +1,11 @@
+<h1>WELCOME TO HOGWARTS WE ARE SO HAPPY TO SEE YOU</h1>
+
+<ul>
+  <% @students.each do |student| %>
+
+  <li>Student Name: <%= student.pretty_name() %> </li>
+  <p><a href="/hogwarts/<%= student.id %>">Get more details</a></p>
+    <hr>
+  <% end %>
+
+</ul>
