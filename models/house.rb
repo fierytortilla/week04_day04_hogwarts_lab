@@ -33,7 +33,8 @@ class House
   def self.find_by_id(id)
     sql= "SELECT * FROM houses WHERE id = $1"
     values= [id]
-    SqlRunner.run(sql, values)
+    result= SqlRunner.run(sql, values)
+    return House.new(result[0])
   end
 
   def self.delete_all()

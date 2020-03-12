@@ -19,16 +19,12 @@ end
 
 post("/hogwarts") do
   @student= Student.new(params)
-  @houses= House.all()
-  @house= @houses.find{|house| house.name== params[:house_name]}
-  @student= Student.new()
   @student.save()
   erb(:create)
 end
 
 get("/hogwarts/:id") do
   @student= Student.find_by_id(params[:id])
-  @house= House.find_by_id(@student.house_name)
   erb(:show)
 end
 

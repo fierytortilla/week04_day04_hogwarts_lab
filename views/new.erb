@@ -8,11 +8,10 @@
   <label for="age">Age:</label>
     <input type="number" name="age" id="age">
   <label for="house-name">House Name:</label>
-    <select id="house-name" name="house_name">
-      <option value="Gryffindor">Gryffindor</option>
-      <option value="Hufflepuff">Hufflepuff</option>
-      <option value="Ravenclaw">Ravenclaw</option>
-      <option value="Slytherin">Slytherin</option>
-  <input type="submit" value="Order pizza">
+    <select id="house-name" name="house_id">
+      <% @houses.each do |house| %>
+      <option value=<%= house.id %>> <%= house.name %></option>
+      <% end %>
+  <input type="submit" value="Create student">
     <hr>
 </form>

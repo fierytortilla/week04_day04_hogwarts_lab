@@ -1,26 +1,27 @@
 require_relative('../db/sql_runner.rb')
+require_relative('house')
 require("pry-byebug")
 
 
 class Student
 
   attr_reader :id
-  attr_accessor :first_name, :last_name, :age, :house_name
+  attr_accessor :first_name, :last_name, :age, :house_id
 
   def initialize(options)
     @first_name= options['first_name']
     @last_name= options['last_name']
     @age= options['age'].to_i()
-    @house_name= options['house_name'].to_i()
+    @house_id= options['house_id'].to_i()
     @id= options['id'].to_i() if options['id']
   end
 
   def save()
     sql= "INSERT INTO students
-          (first_name, last_name, age, house_name)
+          (first_name, last_name, age, house_id)
           VALUES ($1, $2, $3, $4)
           RETURNING id"
-    values= [@first_name, @last_name, @age, @house_name]
+    values= [@first_name, @last_name, @age, @house_id]
     #binding.pry()
     result= SqlRunner.run(sql, values)
     @id= result[0]['id']
@@ -45,9 +46,9 @@ class Student
 
   def update()
     sql= "UPDATE students SET
-          (first_name, last_name, age, house_name)
+          (first_name, last_name, age, house_id)
           = ($1, $2, $3, $4) WHERE id=$5"
-    values= [@first_name, @last_name, @age, @house_name, @id]
+    values= [@first_name, @last_name, @age, @house_id, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -74,10 +75,12 @@ class Student
   end
 
   def get_house()
-    sql= "SELECT * FROM houses WHERE id = $1"
-    values= [@id]
-    result= SqlRunner.run(sql, values)
-    return result[0]['name']
+    return House.find_by_id(@house_id).name
+
+    # sql= "SELECT * FROM houses WHERE id = $1"
+    # values= [@id]
+    # result= SqlRunner.run(sql, values)
+    # return result[0]['name']
   end
 
 

@@ -12,5 +12,5 @@ CREATE TABLE students (
   first_name VARCHAR(255),
   last_name VARCHAR(255),
   age INT,
-  house_name INT REFERENCES houses(id) ON DELETE CASCADE
+  house_id INT REFERENCES houses(id) ON DELETE CASCADE
 );
